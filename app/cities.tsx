@@ -1,6 +1,7 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import citiesData from "../data/cities.json"
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const Cities = () => {
   
@@ -9,6 +10,18 @@ const Cities = () => {
       colors={["#00457d", "#05051f"]}
       style={styles.container}
     >
+      <View style={styles.inputContainer}>
+        <TextInput 
+          style={styles.inputText}
+          placeholder="Digite a cidade"
+          placeholderTextColor={"#FFF"}  
+        />
+        <MaterialIcons 
+          name="search" 
+          size={20} 
+          color={"#FFF"}
+        />
+      </View>
       <ScrollView>
         <View style={styles.scrollList}>
           {
@@ -38,6 +51,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 16,
+    paddingTop: 50,
+    gap: 40,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    borderRadius: 24,
+  },
+  inputText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontFamily: "Montserrat_500Medium"
   },
   scrollList: {
     gap: 16,

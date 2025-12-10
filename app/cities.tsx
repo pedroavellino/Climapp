@@ -2,8 +2,19 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import citiesData from "../data/cities.json"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useEffect, useState } from "react";
 
 const Cities = () => {
+  const [search, setSearch] = useState("");
+  const [filteredCities, setFilteredCities] = useState(citiesData);
+
+  useEffect(() => {
+    const newFilteredCities = citiesData.filter(city =>
+      city.city.includes(search)
+    );
+
+    setFilteredCities(newFilteredCities)
+  }, [search])
   
   return (
     <LinearGradient
@@ -15,6 +26,8 @@ const Cities = () => {
           style={styles.inputText}
           placeholder="Digite a cidade"
           placeholderTextColor={"#FFF"}  
+          value={search}
+          onChangeText={(value) => setSearch(value)}
         />
         <MaterialIcons 
           name="search" 

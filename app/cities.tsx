@@ -10,7 +10,7 @@ const Cities = () => {
 
   useEffect(() => {
     const newFilteredCities = citiesData.filter(city =>
-      city.city.includes(search)
+      city.city.toLocaleLowerCase().includes(search.toLocaleLowerCase())
     );
 
     setFilteredCities(newFilteredCities)
@@ -38,7 +38,7 @@ const Cities = () => {
       <ScrollView>
         <View style={styles.scrollList}>
           {
-            citiesData.map((city) => (
+            filteredCities.map((city) => (
               <View key={city.city} style={styles.listItem}>
                 <Image source={require("../assets/images/clouds.png")}/>
                 <Text

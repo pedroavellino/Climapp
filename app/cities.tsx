@@ -1,11 +1,16 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import citiesData from "../data/cities.json"
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 
 const Cities = () => {
+
+  const router = useRouter();
+
   const [search, setSearch] = useState("");
+
   const [filteredCities, setFilteredCities] = useState(citiesData);
 
   useEffect(() => {
@@ -39,7 +44,12 @@ const Cities = () => {
         <View style={styles.scrollList}>
           {
             filteredCities.map((city) => (
-              <View key={city.city} style={styles.listItem}>
+              <TouchableOpacity 
+                onPress={() => {
+                  router.push(`/${city.city}`)
+                }}
+                key={city.city}
+                style={styles.listItem}>
                 <Image source={require("../assets/images/clouds.png")}/>
                 <Text
                   style={styles.cityName}
@@ -51,7 +61,7 @@ const Cities = () => {
                 >
                   {city.temp}
                 </Text>
-              </View>
+              </TouchableOpacity>
             ))
           }
         </View>
